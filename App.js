@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>This is a guessing number mobile game!</Text>
+      <Text>This is a guessing number mobile game!!</Text>
       <StatusBar style="auto" />
     </View>
   );
