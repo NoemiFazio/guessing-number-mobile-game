@@ -1,23 +1,50 @@
-import { TextInput, View, StyleSheet } from "react-native";
+import { TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { useState } from "react";
 
-export default function StartGameScreen() {
+export default function StartGameScreen({ onPickNumber }) {
+  const [enterednumber, setEnteredNumber] = useState("");
+
+  function numberInputHandler(enteredText) {
+    setEnteredNumber(enteredText);
+  }
+
+  function resetInputHandler() {
+    setEnteredNumber("");
+  }
+
+  function confirmInputHandler() {
+    const chosenNumber = parseInt(enterednumber);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      // title, message and array of configured buttons
+      Alert.alert(
+        "Invalid Number",
+        "You must write a NUMBER between 1 and 99",
+        [{ text: "Okay", style: "destructive", onPress: resetInputHandler }]
+      );
+      return;
+    }
+    onPickNumber(chosenNumber);
+    console.log("Valid number");
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
-        // this prop works on both android and iOS
         keyboardType="number-pad"
         autoCapitalize="none"
         autoCorrect={false}
+        value={enterednumber}
+        onChangeText={numberInputHandler}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -34,9 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3b021f",
     marginHorizontal: 24,
     borderRadius: 8,
-    // works on android only
     elevation: 4,
-    // these 4 work on iOS
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
