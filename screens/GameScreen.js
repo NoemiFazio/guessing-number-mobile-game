@@ -9,12 +9,9 @@ let minBoundary = 1;
 let maxBoundary = 100;
 
 export default function GameScreen({ userNumber }) {
-  const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
-    userNumber
+  const [currentGuess, setCurrentGuess] = useState(() =>
+    generateRandomBetween(minBoundary, maxBoundary)
   );
-  const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   function nextGuessHandler(direction) {
     if (
@@ -32,11 +29,7 @@ export default function GameScreen({ userNumber }) {
       minBoundary = currentGuess + 1;
     }
 
-    const newRandomNum = generateRandomBetween(
-      minBoundary,
-      maxBoundary,
-      currentGuess
-    );
+    const newRandomNum = generateRandomBetween(minBoundary, maxBoundary);
     setCurrentGuess(newRandomNum);
   }
 
