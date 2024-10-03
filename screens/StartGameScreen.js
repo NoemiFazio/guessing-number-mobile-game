@@ -4,6 +4,7 @@ import { useState } from "react";
 import Colors from "../costants/colors";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enterednumber, setEnteredNumber] = useState("");
@@ -19,7 +20,6 @@ export default function StartGameScreen({ onPickNumber }) {
   function confirmInputHandler() {
     const chosenNumber = parseInt(enterednumber);
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
-      // title, message and array of configured buttons
       Alert.alert(
         "Invalid Number",
         "You must write a NUMBER between 1 and 99",
@@ -34,7 +34,7 @@ export default function StartGameScreen({ onPickNumber }) {
     <View style={styles.rootContainer}>
       <Title text="Guess my number" />
       <Card>
-        <Text style={styles.instructionText}>Enter a number</Text>
+        <InstructionText text="Enter a number" />
         <TextInput
           style={styles.numberInput}
           maxLength={2}
@@ -62,10 +62,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 100,
     alignItems: "center",
-  },
-  instructionText: {
-    color: Colors.secondary500,
-    fontSize: 24,
   },
   numberInput: {
     width: 50,
