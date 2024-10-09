@@ -15,7 +15,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -75,7 +75,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="light" />
+      <ExpoStatusBar style="light" />
       <LinearGradient
         colors={[Colors.primary700, Colors.secondary500]}
         style={styles.rootScreen}
