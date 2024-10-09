@@ -15,6 +15,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -73,23 +74,26 @@ export default function App() {
   }
 
   return (
-    <LinearGradient
-      colors={[Colors.primary700, Colors.secondary500]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        resizeMode="cover"
-        source={require("./assets/images/background.png")}
+    <>
+      <StatusBar style="light" />
+      <LinearGradient
+        colors={[Colors.primary700, Colors.secondary500]}
         style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
       >
-        {Platform.OS === "android" ? (
-          <View style={styles.androidScreen}>{screen}</View>
-        ) : (
-          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-        )}
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          resizeMode="cover"
+          source={require("./assets/images/background.png")}
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          {Platform.OS === "android" ? (
+            <View style={styles.androidScreen}>{screen}</View>
+          ) : (
+            <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+          )}
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
